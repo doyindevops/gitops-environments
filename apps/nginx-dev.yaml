@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/https://github.com/doyindevops/devpath-idp/gitops-environments.git
+    repoURL: https://github.com/doyindevops/gitops-environments
     targetRevision: main
     path: dev/nginx-demo
   destination:
