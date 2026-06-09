@@ -14,6 +14,18 @@ spec:
     spec:
       containers:
         - name: catalog-api-local-4
-          image: nginx:stable
+          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/catalog-api-local-4:v1.0.0
           ports:
-            - containerPort: 80
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 15
