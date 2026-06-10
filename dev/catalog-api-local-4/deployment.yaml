@@ -22,6 +22,9 @@ spec:
               value: "catalog-api-local-4"
             - name: ENVIRONMENT
               value: "dev"
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 1000
           readinessProbe:
             httpGet:
               path: /health
