@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: platform-portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: platform-portal
+  template:
+    metadata:
+      labels:
+        app: platform-portal
+    spec:
+      containers:
+        - name: platform-portal
+          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/platform-portal:v1
+          ports:
+            - containerPort: 7007
+          env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-secrets
+                  key: GITHUB_TOKEN
+          readinessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 7007
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /healthcheck
+              port: 7007
+            initialDelaySeconds: 60
+            periodSeconds: 15
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "1.5Gi"
+              cpu: "1000m"
