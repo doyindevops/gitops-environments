@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: catalog-api-local-4
-          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/catalog-api-local-4:v3
+          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/catalog-api-local-4:v4
           ports:
             - containerPort: 3000
           env:
