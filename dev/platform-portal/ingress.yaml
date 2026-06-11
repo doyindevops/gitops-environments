@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: platform-portal
+  namespace: dev
+  annotations:
+    # internet-facing = reachable from the public internet
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    # route traffic straight to pod IPs
+    alb.ingress.kubernetes.io/target-type: ip
+    # listen on both ports...
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    # ...but bounce all HTTP to HTTPS
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    # the certificate to serve
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:589802233850:certificate/d9be21b4-c7a4-4907-be67-14b082f5b169
+spec:
+  ingressClassName: alb
+  rules:
+    - host: portal.doyindevops.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: platform-portal
+                port:
+                  number: 80
