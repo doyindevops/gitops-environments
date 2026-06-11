@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: platform-portal
-          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/platform-portal:v6
+          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/platform-portal:v7
           ports:
             - containerPort: 7007
           securityContext:
