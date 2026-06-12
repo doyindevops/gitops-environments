@@ -35,6 +35,15 @@ spec:
             limits:
               memory: "512Mi"
               cpu: "500m"
+     spec:
+        securityContext:
+        runAsNonRoot: true
+        runAsUser: 999
+        runAsGroup: 999
+        fsGroup: 999
+      containers:
+        - name: postgres
+          ...
   volumeClaimTemplates:
     - metadata:
         name: data
