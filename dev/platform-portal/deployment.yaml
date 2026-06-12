@@ -28,6 +28,9 @@ spec:
                 secretKeyRef:
                   name: backstage-secrets
                   key: GITHUB_TOKEN
+          envFrom:
+            - secretRef:
+                name: postgres-secrets
           readinessProbe:
             httpGet:
               path: /healthcheck
