@@ -7,6 +7,7 @@ spec:
   type: team
   children: []
 ---
+apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
   name: devpath-platform
