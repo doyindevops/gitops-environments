@@ -14,9 +14,19 @@ spec:
       labels:
         app: platform-portal
     spec:
+      volumes:
+        - name: app-config
+          configMap:
+            name: app-config
       containers:
         - name: platform-portal
           image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/platform-portal:v12
+          args:
+            - "packages/backend"
+            - "--config"
+            - "app-config.yaml"
+            - "--config"
+            - "/app/config/app-config.production.yaml"
           ports:
             - containerPort: 7007
           securityContext:
@@ -31,6 +41,10 @@ spec:
           envFrom:
             - secretRef:
                 name: postgres-secrets
+          volumeMounts:
+            - name: app-config
+              mountPath: /app/config
+              readOnly: true
           readinessProbe:
             httpGet:
               path: /healthcheck
@@ -50,3 +64,5 @@ spec:
             limits:
               memory: "1.5Gi"
               cpu: "1000m"
+
+
