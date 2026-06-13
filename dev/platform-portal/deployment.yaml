@@ -20,7 +20,7 @@ spec:
             name: app-config
       containers:
         - name: platform-portal
-          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/platform-portal:v13
+          image: 589802233850.dkr.ecr.eu-west-1.amazonaws.com/platform-portal:v14
           command: ["node"]
           args:
             - "packages/backend"
